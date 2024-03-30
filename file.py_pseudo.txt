@@ -1,0 +1,373 @@
+FOR char IN key: # to remove duplicate character IN key 
+
+IF (char not IN newKey) and char !=' ':
+
+    newKey=newKey+char
+
+
+
+SET alphabet1 TO ['x', 'z', 'y', 'w', 'v', 'u', 't', 's',
+
+        'r', 'q', 'p', 'o', 'n', 'm', 'l', 'k',
+
+        'j', 'i','h', 'g', 'f', 'e', 'd', 'c',
+
+        'b', 'a']
+
+
+
+SET alphabet2 TO 'abcdefghiklmnopqrstuvwxyz'  
+
+i=0
+
+j=1
+
+demo=""
+
+
+
+WHILE i < len(PlainText):
+
+WHILE j < len(PlainText):
+
+    IF PlainText[i] EQUALS PlainText[j]:
+
+        FOR new IN alphabet1:
+
+            IF PlainText[i] != new:
+
+                SET newPT TO newPT+PlainText[i]+new
+
+                i+=1
+
+                j+=1
+
+                break
+
+    ELSE:
+
+        SET demo TO PlainText[j]
+
+        break
+
+SET newPT TO newPT+PlainText[i]+demo
+
+SET demo TO ""
+
+j+=2
+
+i+=2
+
+IF len(newPT) % 2 != 0:
+
+FOR new IN alphabet1:
+
+    IF PlainText[-1] != new:
+
+        SET newPT TO newPT+new
+
+        break
+
+
+
+SET i TO 1
+
+FOR char1 IN newPT[::2]:
+
+FOR char2 IN newPT[i:i+1]:
+
+    blocks.append([char1, char2,'demo'])    
+
+i+=2
+
+
+
+SET newMatrix TO [['', '', '', '', ''],
+
+        ['', '', '', '', ''],
+
+        ['', '', '', '', ''],
+
+        ['', '', '', '', ''],
+
+        ['', '', '', '', '']]
+
+SET m TO 0                                  
+
+FOR i IN range(5):
+
+FOR j IN range(5):
+
+    FOR char IN newKey[m:]:                                                                 
+
+        IF (char EQUALS 'i' or char EQUALS 'j'):
+
+            SET newMatrix[i][j] TO 'i'
+
+            m+=1                          
+
+            break
+
+        ELSEIF char != 'i' and char != 'j':
+
+            SET newMatrix[i][j] TO char                                                                                            
+
+            m+=1                          
+
+            break
+
+n=0
+
+FOR i IN range(5):
+
+FOR j IN range(5):
+
+    IF newMatrix[i][j] != '':                          
+
+        continue
+
+    ELSE:
+
+        FOR char IN alphabet2[n:]:   
+
+            IF alphabet2[n:n+1] not IN newKey:
+
+                SET newMatrix[i][j] TO alphabet2[n:n+1]
+
+                n+=1
+
+                break
+
+            ELSE:
+
+                n+=1
+
+SET CypherText TO ""
+
+SET CypherChar TO []
+
+
+
+FOR block IN blocks:
+
+
+
+FOR i IN range(5):
+
+    FOR j IN range(5):
+
+        IF newMatrix[i][j] EQUALS block[0]:
+
+            SET row1,col1 TO i,j
+
+            break
+
+    ELSE:
+
+        continue
+
+    break
+
+
+
+FOR a IN range(5):
+
+    FOR b IN range(5):
+
+        IF newMatrix[a][b] EQUALS block[1]:
+
+            SET row2,col2 TO a,b
+
+            break
+
+    ELSE:
+
+        continue
+
+    break
+
+    
+
+IF radio EQUALS  'en':  
+
+    IF row1 EQUALS row2:
+
+        IF col1 EQUALS 4:
+
+            SET CypherText TO CypherText+newMatrix[row1][0]
+
+            SET c1 TO newMatrix[row1][0]
+
+            SET CypherText TO CypherText+newMatrix[row1][col2+1]
+
+            SET c2 TO newMatrix[row1][col2+1]
+
+
+
+        ELSEIF col2 EQUALS 4:
+
+            SET CypherText TO CypherText+newMatrix[row1][col1+1]
+
+            SET c1 TO newMatrix[row1][col1+1]
+
+            SET CypherText TO CypherText+newMatrix[row1][0]
+
+            SET c2 TO newMatrix[row1][0]
+
+        ELSE:
+
+            SET CypherText TO CypherText+newMatrix[row1][col1+1]
+
+            SET c1 TO newMatrix[row1][col1+1]
+
+            SET CypherText TO CypherText+newMatrix[row1][col2+1]
+
+            SET c2 TO newMatrix[row1][col2+1]
+
+        CypherChar.append([c1, c2,'row'])
+
+    ELSEIF col1 EQUALS col2:
+
+        IF row1 EQUALS 4:
+
+            SET CypherText TO CypherText+newMatrix[0][col1]
+
+            SET c1 TO newMatrix[0][col1]
+
+            SET CypherText TO CypherText+newMatrix[row2+1][col2]
+
+            SET c2 TO newMatrix[row2+1][col2]
+
+        ELSEIF row2 EQUALS 4:
+
+                SET CypherText TO CypherText+newMatrix[row1+1][col1]
+
+                SET c1 TO newMatrix[row1+1][col1]
+
+                SET CypherText TO CypherText+newMatrix[0][col2]
+
+                SET c2 TO newMatrix[0][col2]
+
+        ELSE:
+
+            SET CypherText TO CypherText+newMatrix[row1+1][col1]
+
+            SET c1 TO newMatrix[row1+1][col1]
+
+            SET CypherText TO CypherText+newMatrix[row2+1][col2]
+
+            SET c2 TO newMatrix[row2+1][col2]
+
+        CypherChar.append([c1, c2,'col'])
+
+    ELSE:
+
+        SET CypherText TO CypherText+newMatrix[row1][col2]
+
+        SET c1 TO newMatrix[row1][col2]
+
+        SET CypherText TO CypherText+newMatrix[row2][col1]
+
+        SET c2 TO newMatrix[row2][col1]
+
+        CypherChar.append([c1, c2,'dig'])
+
+ELSE:
+
+    IF row1 EQUALS row2:
+
+        IF col1 EQUALS 0:
+
+            SET CypherText TO CypherText+newMatrix[row1][4]
+
+            SET c1 TO newMatrix[row1][4]
+
+            SET CypherText TO CypherText+newMatrix[row1][col2-1]
+
+            SET c2 TO newMatrix[row1][col2-1]
+
+
+
+        ELSEIF col2 EQUALS 0:
+
+            SET CypherText TO CypherText+newMatrix[row1][col1-1]
+
+            SET c1 TO newMatrix[row1][col1-1]
+
+            SET CypherText TO CypherText+newMatrix[row1][4]
+
+            SET c2 TO newMatrix[row1][4]
+
+        ELSE:
+
+            SET CypherText TO CypherText+newMatrix[row1][col1-1]
+
+            SET c1 TO newMatrix[row1][col1-1]
+
+            SET CypherText TO CypherText+newMatrix[row1][col2-1]
+
+            SET c2 TO newMatrix[row1][col2-1]
+
+        CypherChar.append([c1, c2,'row'])
+
+    ELSEIF col1 EQUALS col2:
+
+        IF row1 EQUALS 0:
+
+            SET CypherText TO CypherText+newMatrix[4][col1]
+
+            SET c1 TO newMatrix[4][col1]
+
+            SET CypherText TO CypherText+newMatrix[row2-1][col2]
+
+            SET c2 TO newMatrix[row2-1][col2]
+
+        ELSEIF row2 EQUALS 0:
+
+                SET CypherText TO CypherText+newMatrix[row1-1][col1]
+
+                SET c1 TO newMatrix[row1-1][col1]
+
+                SET CypherText TO CypherText+newMatrix[4][col2]
+
+                SET c2 TO newMatrix[4][col2]
+
+        ELSE:
+
+            SET CypherText TO CypherText+newMatrix[row1-1][col1]
+
+            SET c1 TO newMatrix[row1-1][col1]
+
+            SET CypherText TO CypherText+newMatrix[row2-1][col2]
+
+            SET c2 TO newMatrix[row2-1][col2]
+
+        CypherChar.append([c1, c2,'col'])
+
+    ELSE:
+
+        SET CypherText TO CypherText+newMatrix[row1][col2]
+
+        SET c1 TO newMatrix[row1][col2]
+
+        SET CypherText TO CypherText+newMatrix[row2][col1]
+
+        SET c2 TO newMatrix[row2][col1]
+
+        CypherChar.append([c1, c2,'dig'])
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

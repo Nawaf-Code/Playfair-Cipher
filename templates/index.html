@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Document</title>
+    <style>
+      table, td, th {
+      
+      text-align: center;
+      border-spacing: 20px 10rem;
+      }
+      #pt{
+          border-radius: 10%;
+          
+          margin: 6%;
+          border-spacing: 5px 1rem;
+          background: white;
+          border: solid 5px red;
+          
+          background: red;
+          color: white;
+          font-weight: bold;
+      }
+      #ct{
+          border-radius: 10%;
+          border-spacing: 5px 1rem;
+          margin: 6%;
+          background: white;
+          border: solid 5px rgb(11, 223, 238);
+
+          background: rgb(11, 223, 238);
+          color: white;
+          font-weight: bold;
+      }
+      td{
+          width: 1.5em;
+          height: 1.5em;
+          background: #dadada;
+          text-align: center;
+          vertical-align: middle;
+          font-size: 40px;
+          
+          
+      }
+      table {
+      width: 100%;
+      height: 100%;
+      margin-bottom: 25%;
+      border-spacing: 1em 0.5em;
+      padding: 0 2em 1em 0;
+
+      }
+
+      div {
+        float: left;
+        width: 50%;
+      }
+      body{
+        margin: 7%;
+
+      }
+      
+      #header{
+          color:red;
+          text-align: left;
+          width: 100%;
+          margin-bottom: 10%;
+          
+      }
+      .Txtstyle2 {
+          background-color: #ffff;
+          line-height: 0;
+          font-size: 17px;
+          width: 50%;
+          padding: 7px 10px;
+          border-radius: 40px;
+          margin-bottom: 30px;
+      } 
+      .Txtstyle2[type=text], textarea {         
+      transition: all 0.15s ease-in-out;         
+      outline: none;         
+      border: 2px solid red;        
+}
+.Txtstyle2[type=text]:focus, textarea:focus {         
+    box-shadow: 0 0 12px red;         
+    border: 1px solid red;         
+}
+      .button {
+          font-weight: bold;
+      color: white;
+      padding: 16px 32px;
+      text-align: center;
+      font-size: 17px;
+      width: 30%;
+      padding: 7px 10px;
+      border-radius: 40px;
+      transition-duration: 0.4s;
+      margin-bottom: 10%;
+      }
+      .button3 {
+      background-color: white; 
+      color: black; 
+      border: 2px solid red;
+      }
+
+      .button3:hover {
+          font-weight: bold;
+      background-color: red;
+      color: white;
+      }
+      .info{
+          position: fixed;
+      }
+      .container {
+
+position: relative;
+padding-left: 35px;
+margin-bottom: 4%;
+cursor: pointer;
+font-size: 17px;
+-webkit-user-select: none;
+-moz-user-select: none;
+-ms-user-select: none;
+user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.container input {
+position: absolute;
+opacity: 0;
+cursor: pointer;
+}
+
+/* Create a custom radio button */
+.checkmark {
+position: absolute;
+top: 0;
+left: 0;
+height: 20px;
+width: 20px;
+background-color: #eee;
+border-radius: 50%;
+margin-left: 9%;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+background-color: #ccc;
+}
+
+/* When the radio button is checked, add a blue background */
+.container input:checked ~ .checkmark {
+background-color: red;
+border: .5px solid rgb(170, 169, 169);
+}
+
+/* Create the indicator (the dot/circle - hidden when not checked) */
+.checkmark:after {
+content: "";
+position: absolute;
+display: none;
+}
+
+/* Show the indicator (dot/circle) when checked */
+.container input:checked ~ .checkmark:after {
+display: block;
+}
+
+/* Style the indicator (dot/circle) */
+
+    </style>
+</head>
+<body>
+  
+    <form action="/result" method="POST">
+    <div style="float:left; width:40%;" class="info">
+        <br>
+        <h1 id="header">Play Fair Cypher</h1>
+          <input type="text" class="Txtstyle2" name="PlainText"  placeholder = "Plain Text / Cipher Text"/> </br>
+          <input type="text" class="Txtstyle2" name="key"  placeholder = "Key" style="margin-bottom: 4%;"/></br>
+          <label class="container">Encryption
+            <input type="radio" checked="checked" name="radio" value="en" style="margin-bottom: 4%;">
+            <span class="checkmark"></span>
+          </label>
+          <label class="container">Decryption
+            <input type="radio" name="radio" value="de">
+            <span class="checkmark"></span>
+          </label>
+          <br><button class="button button3" py-Click="get" style="margin-top: 4%;">GO</button>
+          {% if PT %}
+          <h2><span style="color:red">Cypher Text:</span> {{ CT }}</h2>
+          <h3>plain text: {{p}}</h3>
+          <h3>key: {{k}}</h3>
+          {%endif%}
+        </p>
+    </div>
+</form>
+    <div style="float:right; width:50%; margin-top: 10%;">
+        <table>
+            <tr>
+              <td>a</td>
+              <td>b</td>
+              <td>c</td>
+              <td>d</td>
+              <td>e</td>
+            </tr>
+            <tr>
+              <td>f</td>
+              <td>g</th>
+              <td>h</td>
+              <td>ij</td>
+              <td>k</td>
+            </tr>
+            <tr>
+              <td>l</td>
+              <td>m</td>
+              <td>n</td>
+              <td>o</td>
+              <td>p</td>
+            </tr>
+            <tr>
+              <td>q</td>
+              <td>r</td>
+              <td>s</td>
+              <td>t</td>
+              <td>u</td>
+            </tr>
+            <tr>
+              <td>v</td>
+              <td>w</td>
+              <td>x</td>
+              <td>y</td>
+              <td>z</td>
+            </tr>
+        </table>
+
+        
+    </div>
+</body>
+</html>
